@@ -6,17 +6,16 @@ classification, one-class-SVM, epsilon-SVM regression, and nu-SVM
 regression. It also provides an automatic model selection tool for
 C-SVM classification. This document explains the use of libsvm.
 
-Libsvm is available at 
-http://www.csie.ntu.edu.tw/~cjlin/libsvm
-Please read the COPYRIGHT file before using libsvm.
+Libsvm is available at [http://www.csie.ntu.edu.tw/~cjlin/libsvm](http://www.csie.ntu.edu.tw/~cjlin/libsvm) Please read the **COPYRIGHT** file before using libsvm.
+
 
 ##Table of Contents
 
 - Quick Start
 - Installation and Data Format
-- `svm-train' Usage
-- `svm-predict' Usage
-- `svm-scale' Usage
+- `svm-train` Usage
+- `svm-predict` Usage
+- `svm-scale` Usage
 - Tips on Practical Use
 - Examples
 - Precomputed Kernels 
@@ -34,7 +33,7 @@ If you are new to SVM and if the data is not large, please go to
 `tools` directory and use easy.py after installation. It does 
 everything automatic -- from data scaling to parameter selection.
 
-Usage: easy.py training_file [testing_file]
+Usage: `easy.py training_file [testing_file]`
 
 More information about parameter selection can be found in
 `tools/README.`
@@ -45,7 +44,7 @@ On Unix systems, type `make` to build the `svm-train` and `svm-predict`
 programs. Run them without arguments to show the usages of them.
 
 On other systems, consult `Makefile` to build them (e.g., see
-'Building Windows binaries` in this file) or use the pre-built
+`Building Windows binaries` in this file) or use the pre-built
 binaries (Windows binaries are in the directory `windows`).
 
 The format of training and testing data file is:
@@ -58,7 +57,7 @@ The format of training and testing data file is:
 Each line contains an instance and is ended by a `'\n'` character.  For
 classification, `<label>` is an integer indicating the class label
 (multi-class is supported). For regression, `<label>` is the target
-value which can be any real number. For one-class SVM, it's not used
+value which can be any **real** number. For one-class SVM, it's not used
 so can be any number.  The pair `<index>:<value>` gives a feature
 (attribute) value: `<index>` is an integer starting from 1 and `<value>`
 is a real number. The only exception is the precomputed kernel, where
@@ -71,55 +70,35 @@ A sample classification data included in this package is
 `heart_scale'. To check if your data is in a correct form, use
 `tools/checkdata.py' (details in `tools/README').
 
-Type `svm-train heart_scale', and the program will read the training
-data and output the model file `heart_scale.model'. If you have a test
-set called heart_scale.t, then type `svm-predict heart_scale.t
-heart_scale.model output' to see the prediction accuracy. The `output'
+Type `svm-train heart_scale`, and the program will read the training
+data and output the model file `heart_scale.model`. If you have a test
+set called `heart_scale.t`, then type `svm-predict heart_scale.t
+heart_scale.model output` to see the prediction accuracy. The `output`
 file contains the predicted class labels.
 
 For classification, if training data are in only one class (i.e., all
-labels are the same), then `svm-train' issues a warning message:
-`Warning: training data in only one class. See README for details,'
+labels are the same), then `svm-train` issues a warning message:
+`Warning: training data in only one class. See README for details`,
 which means the training data is very unbalanced. The label in the
 training data is directly returned when testing.
 
 There are some other useful programs in this package.
 
-svm-scale:
+* **svm-scale:** This is a tool for scaling input data file.
 
-	This is a tool for scaling input data file.
+* **svm-toy:** This is a simple graphical interface which shows how SVM separate data in a plane. You can click in the window to draw data points. Use "change" button to choose class 1, 2 or 3 (i.e., up to three classes are supported), "load" button to load data from a file, "save" button to save data to a file, "run" button to obtain an SVM model, and "clear" button to clear the window.
 
-svm-toy:
+>You can enter options in the bottom of the window, the syntax of options is the same as `svm-train`.
 
-	This is a simple graphical interface which shows how SVM
-	separate data in a plane. You can click in the window to 
-	draw data points. Use "change" button to choose class 
-	1, 2 or 3 (i.e., up to three classes are supported), "load"
-	button to load data from a file, "save" button to save data to
-	a file, "run" button to obtain an SVM model, and "clear"
-	button to clear the window.
+>Note that "load" and "save" consider dense data format both in classification and the regression cases. For classification, each data point has one label (the color) that must be 1, 2, or 3 and two attributes (x-axis and y-axis values) in [0,1). For regression, each data point has one target value (y-axis) and one attribute (x-axis values) in [0, 1).
 
-	You can enter options in the bottom of the window, the syntax of
-	options is the same as `svm-train'.
+Type `make' in respective directories to build them.
 
-	Note that "load" and "save" consider dense data format both in
-	classification and the regression cases. For classification,
-	each data point has one label (the color) that must be 1, 2,
-	or 3 and two attributes (x-axis and y-axis values) in
-	[0,1). For regression, each data point has one target value
-	(y-axis) and one attribute (x-axis values) in [0, 1).
+You need Qt library to build the Qt version.	(available from [http://www.trolltech.com](http://www.trolltech.com))
 
-	Type `make' in respective directories to build them.
-
-	You need Qt library to build the Qt version.
-	(available from http://www.trolltech.com)
-
-	You need GTK+ library to build the GTK version.
-	(available from http://www.gtk.org)
+You need GTK+ library to build the GTK version.(available from [http://www.gtk.org](http://www.gtk.org))
 	
-	The pre-built Windows binaries are in the `windows'
-	directory. We use Visual C++ on a 32-bit machine, so the
-	maximal cache size is 2GB.
+The pre-built Windows binaries are in the `windows` directory. We use Visual C++ on a 32-bit machine, so the maximal cache size is 2GB.
 
 ##`svm-train' Usage
 
